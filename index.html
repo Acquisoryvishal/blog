@@ -1,0 +1,32 @@
+---
+layout: default
+title: Home
+---
+<section class="intro">
+  <p class="eyebrow">WELCOME</p>
+  <h1>A little space for big ideas.</h1>
+  <p>{{ site.description | escape }}</p>
+</section>
+
+<section aria-labelledby="latest-posts">
+  <h2 id="latest-posts">Latest posts</h2>
+  {% assign published_posts = site.posts | where_exp: "post", "post.title" %}
+  {% if published_posts.size > 0 %}
+    <div class="post-list">
+      {% for post in published_posts %}
+        <article class="post-card">
+          <p class="post-date"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time></p>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+          {% if post.description %}
+            <p>{{ post.description | escape }}</p>
+          {% else %}
+            <p>{{ post.excerpt | strip_html | truncate: 180 }}</p>
+          {% endif %}
+          <a class="read-link" href="{{ post.url | relative_url }}">Read post <span aria-hidden="true">→</span></a>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty-state">No posts yet. Sign in to the editor to publish your first one.</p>
+  {% endif %}
+</section>

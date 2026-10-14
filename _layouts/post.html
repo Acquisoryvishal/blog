@@ -1,0 +1,14 @@
+---
+layout: default
+---
+<article>
+  <a class="back-link" href="{{ '/' | relative_url }}">← All posts</a>
+  <header class="post-header">
+    <p class="post-date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.description %}<p class="post-description">{{ page.description | escape }}</p>{% endif %}
+  </header>
+  <div class="post-body">
+    {{ content }}
+  </div>
+</article>
